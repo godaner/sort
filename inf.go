@@ -1,19 +1,52 @@
 package sort
 
 type IntsInterface struct {
-	Ints []int
+	Datas []int
 }
 
-func (ii *IntsInterface) Len() int {
-	return len(ii.Ints)
+func (mi *IntsInterface) Set(i int, data interface{}) {
+	mi.Datas[i] = data.(int)
 }
 
-func (ii *IntsInterface) Less(i, j int) bool {
-	return ii.Ints[i] < ii.Ints[j]
+func (mi *IntsInterface) Len() int {
+	return len(mi.Datas)
 }
 
-func (ii *IntsInterface) Swap(i, j int) {
-	t := ii.Ints[i]
-	ii.Ints[i] = ii.Ints[j]
-	ii.Ints[j] = t
+func (mi *IntsInterface) Less(i, j int) bool {
+	return mi.Datas[i] < mi.Datas[j]
+}
+
+func (mi *IntsInterface) Swap(i, j int) {
+	t := mi.Datas[i]
+	mi.Datas[i] = mi.Datas[j]
+	mi.Datas[j] = t
+}
+func (mi *IntsInterface) Get(i int) (data interface{}) {
+	return mi.Datas[i]
+}
+
+type StrsInterface struct {
+	Datas []string
+}
+
+func (mi *StrsInterface) Get(i int) (data interface{}) {
+	return mi.Datas[i]
+}
+
+func (mi *StrsInterface) Set(i int, data interface{}) {
+	mi.Datas[i] = data.(string)
+}
+
+func (mi *StrsInterface) Len() int {
+	return len(mi.Datas)
+}
+
+func (mi *StrsInterface) Less(i, j int) bool {
+	return mi.Datas[i] < mi.Datas[j]
+}
+
+func (mi *StrsInterface) Swap(i, j int) {
+	t := mi.Datas[i]
+	mi.Datas[i] = mi.Datas[j]
+	mi.Datas[j] = t
 }

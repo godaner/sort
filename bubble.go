@@ -1,18 +1,15 @@
 package sort
 
-import (
-	"sort"
-)
-
 type BubbleSort struct {
 }
 
-func (b *BubbleSort) Sort(data sort.Interface) {
-	for i := 0; i < data.Len()-1; i++ {
-		for j := 0; j < data.Len()-1-i; j++ {
-			if !data.Less(j, j+1) {
-				data.Swap(j, j+1)
+func (b *BubbleSort) Sort(src Interface) (dst Interface) {
+	for i := 0; i < src.Len()-1; i++ {
+		for j := 0; j < src.Len()-1-i; j++ {
+			if !src.Less(j, j+1) {
+				src.Swap(j, j+1)
 			}
 		}
 	}
+	return src
 }
