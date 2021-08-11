@@ -1,48 +1,42 @@
 package sort
 
 type Merge struct {
-	NewInterface func(len int) Interface
+	NewArray func(len int) Array
 }
 
-func (m *Merge) Sort(src Interface) (dst Interface) {
-	nd := m.NewInterface(src.Len())
-	part(0, src.Len()-1, src, nd)
-	return nd
+func (m *Merge) Sort(src Array) (dst Array) {
+	return m.part(src)
 }
 
-func part(left, right int, od, nd Interface) {
-	if right-left+1 <= 1 {
-		return
+func (m *Merge) part(src Array) (r Array) {
+	if src.Len() <= 1 {
+		return src
 	}
-	left1 := left
-	right1 := (right + left) / 2
-	left2 := right1 + 1
-	right2 := right
-	part(left1, right1, od, nd)
-	part(left2, right2, od, nd)
-	merge(left1, right1, left2, right2, od, nd)
+	mid := src.Len() / 2
+	r1 := m.part(src.Slice(0, mid))
+	r2 := m.part(src.Slice(mid, src.Len()))
+	return m.merge(r1, r2)
 }
 
-func merge(left1, right1, left2, right2 int, od, nd Interface) {
-	nIndex := left1
-	for left1 <= right1 && left2 <= right2 {
-		if od.Less(left1, left2) {
-			nd.Set(nIndex, od.Get(left1))
-			left1++
+func (m *Merge) merge(r1, r2 Array) (r Array) {
+	r = m.NewArray(0)
+	i, j := 0, 0
+	for ; i < r1.Len() && j < r2.Len(); {
+		if r1.LessArray(i, r2, j) {
+			r.Append(r1.Get(i))
+			i++
 		} else {
-			nd.Set(nIndex, od.Get(left2))
-			left2++
+			r.Append(r2.Get(j))
+			j++
 		}
-		nIndex++
 	}
-	for left1 <= right1 {
-		nd.Set(nIndex, od.Get(left1))
-		nIndex++
-		left1++
+	for i < r1.Len() {
+		r.Append(r1.Get(i))
+		i++
 	}
-	for left2 <= right2 {
-		nd.Set(nIndex, od.Get(left2))
-		nIndex++
-		left2++
+	for j < r2.Len() {
+		r.Append(r2.Get(j))
+		j++
 	}
+	return r
 }

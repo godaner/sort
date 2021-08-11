@@ -4,7 +4,7 @@ type Shell struct {
 	Gap int
 }
 
-func (s *Shell) Sort(src Interface) (dst Interface) {
+func (s *Shell) Sort(src Array) (dst Array) {
 	for ; s.Gap >= 1; s.Gap = s.Gap / 2 { // gap/2
 		for g := 0; g < s.Gap; g++ { // every group first element
 			// simple insert sort
