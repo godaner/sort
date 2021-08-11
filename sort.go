@@ -3,6 +3,7 @@ package sort
 type Array interface {
 	Len() int
 	Less(i, j int) bool
+	LessObj(i int, obj interface{}) bool
 	LessArray(i int, arr Array, j int) bool
 	Swap(i, j int)
 	Set(i int, data interface{})

@@ -4,6 +4,13 @@ type IntArray struct {
 	Datas []int
 }
 
+func (mi *IntArray) LessObj(i int, obj interface{}) bool {
+	if mi.Get(i).(int) < obj.(int) {
+		return false
+	}
+	return true
+}
+
 func (mi *IntArray) IsDesc() bool {
 	if mi.Len() <= 1 {
 		return true
@@ -127,6 +134,12 @@ func (mi *StringArray) IsAsc() bool {
 		if !mi.Less(i, i+1) {
 			return false
 		}
+	}
+	return true
+}
+func (mi *StringArray) LessObj(i int, obj interface{}) bool {
+	if mi.Get(i).(string) < obj.(string) {
+		return false
 	}
 	return true
 }

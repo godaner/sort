@@ -13,8 +13,8 @@ func BenchmarkSelect_Sort(b *testing.B) {
 	sorter := &Select{
 	}
 	for i := 0; i < b.N; i++ {
-		b.StartTimer()
 		arr := &IntArray{Datas: unSortIntN(5000)}
+		b.StartTimer()
 		dst := sorter.Sort(arr)
 		b.StopTimer()
 		if !dst.IsAsc() {
