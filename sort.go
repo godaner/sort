@@ -9,6 +9,8 @@ type Array interface {
 	Get(i int) (data interface{})
 	Slice(s, e int) (r Array)
 	Append(i interface{})
+	IsDesc() bool
+	IsAsc() bool
 }
 
 type Sortable interface {

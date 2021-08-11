@@ -12,7 +12,11 @@ func BenchmarkBubbleSort_Sort(b *testing.B) {
 	sorter := &BubbleSort{}
 	for i := 0; i < b.N; i++ {
 		b.StartTimer()
-		sorter.Sort(&IntArray{Datas: unSortInt()})
+		arr := &IntArray{Datas: unSortIntN(5000)}
+		dst := sorter.Sort(arr)
 		b.StopTimer()
+		if !dst.IsAsc() {
+			b.Error("array is not asc")
+		}
 	}
 }

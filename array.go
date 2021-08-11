@@ -4,6 +4,30 @@ type IntArray struct {
 	Datas []int
 }
 
+func (mi *IntArray) IsDesc() bool {
+	if mi.Len() <= 1 {
+		return true
+	}
+	for i := 0; i < mi.Len()-1; i++ {
+		if mi.Less(i, i+1) {
+			return false
+		}
+	}
+	return true
+}
+
+func (mi *IntArray) IsAsc() bool {
+	if mi.Len() <= 1 {
+		return true
+	}
+	for i := 0; i < mi.Len()-1; i++ {
+		if !mi.Less(i, i+1) {
+			return false
+		}
+	}
+	return true
+}
+
 func (mi *IntArray) Append(i interface{}) {
 	mi.Datas = append(mi.Datas, i.(int))
 }
@@ -82,4 +106,27 @@ func (mi *StringArray) Slice(s, e int) (r Array) {
 }
 func (mi *StringArray) Append(i interface{}) {
 	mi.Datas = append(mi.Datas, i.(string))
+}
+func (mi *StringArray) IsDesc() bool {
+	if mi.Len() <= 1 {
+		return true
+	}
+	for i := 0; i < mi.Len()-1; i++ {
+		if mi.Less(i, i+1) {
+			return false
+		}
+	}
+	return true
+}
+
+func (mi *StringArray) IsAsc() bool {
+	if mi.Len() <= 1 {
+		return true
+	}
+	for i := 0; i < mi.Len()-1; i++ {
+		if !mi.Less(i, i+1) {
+			return false
+		}
+	}
+	return true
 }
