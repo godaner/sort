@@ -3,7 +3,7 @@ package sort
 type Select struct {
 }
 
-func (s *Select) Sort(src Array) (dst Array) {
+func (s *Select) Sort(src Sortable) (dst Sortable) {
 	for i := 0; i < src.Len()-1; i++ {
 		minIndex := i
 		for j := i + 1; j < src.Len(); j++ {

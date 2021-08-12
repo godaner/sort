@@ -5,7 +5,7 @@ type Shell struct {
 	cGap int
 }
 
-func (s *Shell) Sort(src Array) (dst Array) {
+func (s *Shell) Sort(src Sortable) (dst Sortable) {
 	s.cGap = s.Gap
 	for ; s.cGap >= 1; s.cGap = s.cGap / 2 { // cGap/2
 		for first := 0; first < s.cGap; first++ { // every group first element

@@ -1,14 +1,14 @@
 package sort
 
 type Merge struct {
-	NewArray func(len int) Array
+	NewSortable func(len int) Sortable
 }
 
-func (m *Merge) Sort(src Array) (dst Array) {
+func (m *Merge) Sort(src Sortable) (dst Sortable) {
 	return m.part(src)
 }
 
-func (m *Merge) part(src Array) (r Array) {
+func (m *Merge) part(src Sortable) (r Sortable) {
 	if src.Len() <= 1 {
 		return src
 	}
@@ -18,11 +18,11 @@ func (m *Merge) part(src Array) (r Array) {
 	return m.merge(r1, r2)
 }
 
-func (m *Merge) merge(r1, r2 Array) (r Array) {
-	r = m.NewArray(0)
+func (m *Merge) merge(r1, r2 Sortable) (r Sortable) {
+	r = m.NewSortable(0)
 	i, j := 0, 0
 	for ; i < r1.Len() && j < r2.Len(); {
-		if r1.LessArray(i, r2, j) {
+		if r1.LessSortableJ(i, r2, j) {
 			r.Append(r1.Get(i))
 			i++
 		} else {

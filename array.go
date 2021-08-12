@@ -4,6 +4,10 @@ type IntArray struct {
 	Datas []int
 }
 
+func (mi *IntArray) Cover(i, j int) {
+	mi.Datas[j] = mi.Datas[i]
+}
+
 func (mi *IntArray) LessObj(i int, obj interface{}) bool {
 	if mi.Get(i).(int) < obj.(int) {
 		return false
@@ -39,14 +43,14 @@ func (mi *IntArray) Append(i interface{}) {
 	mi.Datas = append(mi.Datas, i.(int))
 }
 
-func (mi *IntArray) LessArray(i int, arr Array, j int) bool {
+func (mi *IntArray) LessSortableJ(i int, arr Sortable, j int) bool {
 	if mi.Datas[i] < (arr.Get(j).(int)) {
 		return true
 	}
 	return false
 }
 
-func (mi *IntArray) Slice(s, e int) (r Array) {
+func (mi *IntArray) Slice(s, e int) (r Sortable) {
 	return &IntArray{
 		Datas: mi.Datas[s:e],
 	}
@@ -99,14 +103,14 @@ func (mi *StringArray) Swap(i, j int) {
 	mi.Datas[j] = t
 }
 
-func (mi *StringArray) LessArray(i int, arr Array, j int) bool {
+func (mi *StringArray) LessSortableJ(i int, arr Sortable, j int) bool {
 	if mi.Datas[i] < (arr.Get(j).(string)) {
 		return true
 	}
 	return false
 }
 
-func (mi *StringArray) Slice(s, e int) (r Array) {
+func (mi *StringArray) Slice(s, e int) (r Sortable) {
 	return &StringArray{
 		Datas: mi.Datas[s:e],
 	}
@@ -142,4 +146,7 @@ func (mi *StringArray) LessObj(i int, obj interface{}) bool {
 		return false
 	}
 	return true
+}
+func (mi *StringArray) Cover(i, j int) {
+	mi.Datas[j] = mi.Datas[i]
 }
