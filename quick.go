@@ -25,7 +25,7 @@ func part(src Sortable) Sortable {
 		src.Cover(left, right)
 		right--
 	}
-	src.Set(right, tmp)
+	src.Set(left, tmp)
 	if 0 <= right-1 {
 		src = part(src.Slice(0, right-1))
 	}

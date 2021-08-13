@@ -4,6 +4,19 @@ type IntArray struct {
 	Datas []int
 }
 
+func (mi *IntArray) AppendSortable(sa Sortable) {
+	ia := sa.(*IntArray)
+	mi.Datas = append(mi.Datas, ia.Datas...)
+}
+
+func (mi *IntArray) Range(f RangeFunc) {
+	for i := 0; i < mi.Len(); i++ {
+		if !f(i, mi.Datas[i]) {
+			return
+		}
+	}
+}
+
 func (mi *IntArray) Cover(i, j int) {
 	mi.Datas[j] = mi.Datas[i]
 }
@@ -149,4 +162,16 @@ func (mi *StringArray) LessObj(i int, obj interface{}) bool {
 }
 func (mi *StringArray) Cover(i, j int) {
 	mi.Datas[j] = mi.Datas[i]
+}
+
+func (mi *StringArray) Range(f RangeFunc) {
+	for i := 0; i < mi.Len(); i++ {
+		if !f(i, mi.Datas[i]) {
+			return
+		}
+	}
+}
+func (mi *StringArray) AppendSortable(sa Sortable) {
+	ia := sa.(*StringArray)
+	mi.Datas = append(mi.Datas, ia.Datas...)
 }

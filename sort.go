@@ -1,5 +1,7 @@
 package sort
 
+type RangeFunc func(index int, element interface{}) bool
+
 // Sortable can be sorted
 type Sortable interface {
 	// Len get Sortable length
@@ -22,10 +24,14 @@ type Sortable interface {
 	Slice(s, e int) (r Sortable)
 	// Append append element
 	Append(e interface{})
+	// AppendSortable append Sortable
+	AppendSortable(sa Sortable)
 	// IsDesc Sortable is desc?
 	IsDesc() bool
 	// IsAsc Sortable is asc?
 	IsAsc() bool
+	// Range range the element
+	Range(f RangeFunc)
 }
 
 // Sorter sort the Sortable
